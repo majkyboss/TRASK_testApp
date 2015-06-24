@@ -7,12 +7,16 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import test.entities.Registration;
 
 /**
  *
@@ -42,10 +46,17 @@ public class NewServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            
+
             SessionFactory factory = HibernateUtil.getSessionFactory();
-//            factory.
-            
+            Session s = factory.openSession();
+            s.beginTransaction();
+            Query q = s.createQuery("from Regisration");
+            List<Registration> regs = q.list();
+
+            for (Registration reg : regs) {
+                out.println(reg.getId().getIco() + "<br>");
+            }
+
             out.println("</body>");
             out.println("</html>");
         }
