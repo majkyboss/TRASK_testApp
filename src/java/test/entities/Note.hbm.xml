@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.6.2015 13:49:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.entities.Note" table="Note" catalog="mydb">
+        <composite-id name="id" class="test.entities.NoteId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="registrationIco" type="string">
+                <column name="registration_ico" length="15" />
+            </key-property>
+            <key-property name="registrationRegDate" type="date">
+                <column name="registration_reg_date" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="registration" class="test.entities.Registration" update="false" insert="false" fetch="select">
+            <column name="registration_ico" length="15" not-null="true" />
+            <column name="registration_reg_date" length="10" not-null="true" />
+        </many-to-one>
+        <property name="createdDate" type="string">
+            <column name="created_date" length="45" />
+        </property>
+        <property name="text" type="string">
+            <column name="text" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

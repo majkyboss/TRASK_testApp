@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.6.2015 13:49:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.entities.Unit" table="Unit" catalog="mydb" optimistic-lock="version">
+        <composite-id name="id" class="test.entities.UnitId">
+            <key-property name="branchId" type="int">
+                <column name="branch_id" />
+            </key-property>
+            <key-property name="userId" type="int">
+                <column name="user_id" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

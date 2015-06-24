@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.6.2015 13:49:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.entities.User" table="User" catalog="mydb">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="role" class="test.entities.Role" fetch="select">
+            <column name="role_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="45" />
+        </property>
+        <property name="degree" type="string">
+            <column name="degree" length="45" />
+        </property>
+        <property name="birthNumber" type="string">
+            <column name="birth_number" length="45" not-null="true" />
+        </property>
+        <property name="dateIn" type="date">
+            <column name="date_in" length="10" not-null="true" />
+        </property>
+        <property name="dateOut" type="date">
+            <column name="date_out" length="10" />
+        </property>
+        <set name="branches" table="Branch" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="manager_id" not-null="true" />
+            </key>
+            <one-to-many class="test.entities.Branch" />
+        </set>
+    </class>
+</hibernate-mapping>

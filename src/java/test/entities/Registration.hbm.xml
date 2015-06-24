@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.6.2015 13:49:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.entities.Registration" table="Registration" catalog="mydb">
+        <composite-id name="id" class="test.entities.RegistrationId">
+            <key-property name="ico" type="string">
+                <column name="ico" length="15" />
+            </key-property>
+            <key-property name="regDate" type="date">
+                <column name="reg_date" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="regState" class="test.entities.RegState" fetch="select">
+            <column name="regState_id" not-null="true" />
+        </many-to-one>
+        <property name="companyName" type="string">
+            <column name="company_name" length="45" />
+        </property>
+<!--        <property name="unitUserId" type="int">
+            <column name="unit_user_id" not-null="true" />
+        </property>
+        <property name="unitBranchId" type="int">
+            <column name="unit_branch_id" not-null="true" />
+        </property>-->
+        <many-to-one name="unit" class="test.entities.Unit" fetch="select">
+                <column name="user_id" not-null="true" />
+                <column name="branch_id" not-null="true" />
+        </many-to-one>
+        <set name="notes" table="Note" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="registration_ico" length="15" not-null="true" />
+                <column name="registration_reg_date" length="10" not-null="true" />
+            </key>
+            <one-to-many class="test.entities.Note" />
+        </set>
+    </class>
+</hibernate-mapping>
